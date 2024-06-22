@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", function() {
+    // Load the common navbar
+    fetch("nav.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("navbar-container").innerHTML = data;
+        });
+
     // Add smooth scrolling to all links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -6,27 +13,6 @@ document.addEventListener("DOMContentLoaded", function() {
             document.querySelector(this.getAttribute('href')).scrollIntoView({
                 behavior: 'smooth'
             });
-        });
-    });
-
-    // Add active class to the current section link in navbar
-    const sections = document.querySelectorAll("section");
-    const navLi = document.querySelectorAll("nav ul li a");
-
-    window.addEventListener("scroll", () => {
-        let current = "";
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (pageYOffset >= sectionTop - 60) {
-                current = section.getAttribute("id");
-            }
-        });
-
-        navLi.forEach(a => {
-            a.classList.remove("active");
-            if (a.getAttribute("href") === `#${current}`) {
-                a.classList.add("active");
-            }
         });
     });
 });
